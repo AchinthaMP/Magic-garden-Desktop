@@ -232,7 +232,7 @@ function positionOverlay() {
   var size = mainWindow.getContentSize();
   var pos = mainWindow.getPosition();
   overlayWin.setPosition(
-    pos[0] + size[0] - 140 - 16,
+    pos[0] + 16,
     pos[1] + 16
   );
 }
