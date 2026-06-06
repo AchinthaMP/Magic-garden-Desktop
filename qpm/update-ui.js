@@ -1,6 +1,7 @@
-module.exports = `
 (function() {
+  console.log('[MG] Update UI script evaluated');
   if (window.__MG_UPDATE_UI__) {
+    console.log('[MG] Update UI already loaded');
     if (typeof window.__MG_UPDATE_UI_SHOW === 'function') {
       window.__MG_UPDATE_UI_SHOW();
     }
@@ -252,7 +253,8 @@ module.exports = `
 
     var container = document.createElement('div');
     container.innerHTML = html();
-    document.documentElement.appendChild(container.firstElementChild);
+    (document.body || document.documentElement).appendChild(container.firstElementChild);
+    console.log('[MG] Update UI appended to document');
     
     document.getElementById('mg-back').onclick = hide;
     document.getElementById('mg-close-x').onclick = hide;
@@ -328,4 +330,3 @@ module.exports = `
 
   initUI();
 })();
-`;

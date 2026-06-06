@@ -74,7 +74,8 @@ function notifyBadge(show) {
 }
 
 async function check() {
-  if (!app.isPackaged) {
+  const isPackaged = true; // Force true to test against GitHub live releases
+  if (!isPackaged) {
     setTimeout(() => {
       sendToUI('mg:update-not-available');
       notifyBadge(false);
