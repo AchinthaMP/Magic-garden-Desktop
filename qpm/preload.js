@@ -24,4 +24,11 @@ const pixiHook = `
 })();
 `;
 
-eval(polyfill + '\n' + pixiHook);
+try {
+  eval(polyfill + '\n' + pixiHook);
+} catch (e) {
+  try {
+    require('electron').dialog.showErrorBox('Magic Garden - Preload Error', 
+      'Failed to initialize QPM:\n' + (e.stack || e.message || e));
+  } catch (_) {}
+}

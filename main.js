@@ -1,6 +1,18 @@
 const path = require('path');
 const fs = require('fs');
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, dialog } = require('electron');
+
+process.on('uncaughtException', function(err) {
+  try {
+    dialog.showErrorBox('Magic Garden - Error', err.stack || err.message || String(err));
+  } catch (_) {}
+});
+
+process.on('unhandledRejection', function(err) {
+  try {
+    dialog.showErrorBox('Magic Garden - Error', err.stack || err.message || String(err));
+  } catch (_) {}
+});
 
 let mainWindow = null;
 
@@ -33,7 +45,13 @@ const createWindow = () => {
     callback({ responseHeaders: headers });
   });
 
-  const qpm = fs.readFileSync(path.join(__dirname, 'assets', 'QPM.user.js'), 'utf8');
+  var qpm;
+  try {
+    qpm = fs.readFileSync(path.join(__dirname, 'assets', 'QPM.user.js'), 'utf8');
+  } catch (e) {
+    dialog.showErrorBox('Magic Garden - Missing File', 'Could not load assets/QPM.user.js\n' + e.message);
+    return;
+  }
 
   // Sprite fallback: finds __PIXI_APP__ after __PIXI_APP_INIT__ is set by the preload hook
   const spriteFallback = `

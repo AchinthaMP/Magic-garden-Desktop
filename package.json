@@ -24,7 +24,7 @@
     "appId": "com.magicgarden.desktop",
     "productName": "Magic Garden",
     "asar": true,
-    "compression": "maximum",
+    "compression": "normal",
     "files": [
       "main.js",
       "package.json",
@@ -32,8 +32,22 @@
       "assets/**"
     ],
     "win": {
-      "target": "portable",
+      "target": [
+        "portable",
+        "nsis"
+      ],
       "artifactName": "Magic-Garden-Desktop-${version}.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": null,
+      "uninstallerIcon": null,
+      "installerHeaderIcon": null,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Magic Garden"
     }
   }
 }
