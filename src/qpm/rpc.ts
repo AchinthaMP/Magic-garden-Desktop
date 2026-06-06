@@ -1,13 +1,13 @@
-const DiscordRPC = require('discord-rpc');
+import DiscordRPC from 'discord-rpc';
 
 const CLIENT_ID = '1512814560661344457';
 
-let rpc = null;
+let rpc: DiscordRPC.Client | null = null;
 let connected = false;
 let startTime = 0;
-let retryTimer = null;
+let retryTimer: ReturnType<typeof setTimeout> | null = null;
 
-function connect() {
+export function connect(): void {
   if (connected || rpc) return;
 
   try {
@@ -28,13 +28,13 @@ function connect() {
       connected = false;
       rpc = null;
     });
-  } catch (e) {
+  } catch {
     connected = false;
     rpc = null;
   }
 }
 
-function setActivity() {
+function setActivity(): void {
   if (!rpc || !connected) return;
 
   rpc.setActivity({
@@ -49,7 +49,7 @@ function setActivity() {
   }).catch(() => {});
 }
 
-function disconnect() {
+export function disconnect(): void {
   if (retryTimer) {
     clearTimeout(retryTimer);
     retryTimer = null;
@@ -60,5 +60,3 @@ function disconnect() {
   }
   connected = false;
 }
-
-module.exports = { connect, disconnect };

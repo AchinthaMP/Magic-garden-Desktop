@@ -2,9 +2,10 @@
   "name": "magic-garden-desktop",
   "version": "0.26.31",
   "description": "Magic Garden Desktop — standalone desktop client with QPM-GR mod integration",
-  "main": "main.js",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "electron .",
+    "build": "tsc && copy /Y src\\qpm\\polyfill.js dist\\qpm\\ && copy /Y src\\qpm\\custom-panel.js dist\\qpm\\",
+    "start": "npm run build && electron .",
     "dist": "electron-builder --win nsis --x64 --publish never",
     "dist:ci": "electron-builder --win nsis --x64 --publish always"
   },
@@ -22,11 +23,15 @@
   "license": "MIT",
   "dependencies": {
     "discord-rpc": "^4.0.1",
+    "electron-log": "^5.4.4",
     "electron-updater": "^6.8.9"
   },
   "devDependencies": {
-    "electron": "^39.8.10",
-    "electron-builder": "^26.4.0"
+    "@types/discord-rpc": "^4.0.10",
+    "@types/node": "^22.0.0",
+    "electron": "^42.3.3",
+    "electron-builder": "^26.4.0",
+    "typescript": "^5.8.0"
   },
   "build": {
     "appId": "com.magicgarden.desktop",
@@ -34,7 +39,7 @@
     "asar": true,
     "compression": "normal",
     "files": [
-      "main.js",
+      "dist/**/*",
       "package.json",
       "qpm/**",
       "assets/**"
