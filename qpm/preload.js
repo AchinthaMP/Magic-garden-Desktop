@@ -1,7 +1,33 @@
 const fs = require('fs');
 const path = require('path');
+const { ipcRenderer } = require('electron');
 
 const polyfill = fs.readFileSync(path.join(__dirname, 'polyfill.js'), 'utf8');
+const updateUICode = require('./update-ui');
+
+window.__mg_update = {
+  checkForUpdates: () => ipcRenderer.invoke('mg:check-update'),
+  downloadUpdate: () => ipcRenderer.invoke('mg:download-update'),
+  installUpdate: () => ipcRenderer.invoke('mg:install-update'),
+  getVersion: () => ipcRenderer.invoke('mg:get-version'),
+  getReleaseNotes: () => ipcRenderer.invoke('mg:get-release-notes'),
+  on: function(channel, cb) {
+    ipcRenderer.on('mg:' + channel, function(_, data) { cb(data); });
+  },
+};
+
+// Listen for show-update-modal request from main process
+ipcRenderer.on('mg:show-modal', function() {
+  if (window.__MG_UPDATE_UI__ && typeof window.__MG_UPDATE_UI_SHOW === 'function') {
+    window.__MG_UPDATE_UI_SHOW();
+    return;
+  }
+  try {
+    eval(updateUICode);
+  } catch (err) {
+    console.error('[MG] UI Eval Error:', err);
+  }
+});
 
 // PIXI hook: same as QPM's createPixiHooks()
 // Intercepts Object.defineProperty for 'app' getter to detect PIXI init

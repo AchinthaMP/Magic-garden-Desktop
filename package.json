@@ -1,21 +1,29 @@
 {
   "name": "magic-garden-desktop",
-  "version": "0.26.2",
+  "version": "0.26.3",
   "description": "Magic Garden Desktop — standalone desktop client with QPM-GR mod integration",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder --win nsis --x64 --publish never",
-    "dist:ci": "electron-builder --win nsis --x64 --publish never"
+    "dist:ci": "electron-builder --win nsis --x64 --publish always"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/AchinthaMP/Magic-garden-Desktop.git"
   },
-  "keywords": ["magic-garden", "qpm", "desktop", "electron"],
+  "keywords": [
+    "magic-garden",
+    "qpm",
+    "desktop",
+    "electron"
+  ],
   "author": "AchinthaMP",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "discord-rpc": "^4.0.1",
+    "electron-updater": "^6.8.9"
+  },
   "devDependencies": {
     "electron": "^39.8.10",
     "electron-builder": "^26.4.0"
@@ -31,6 +39,11 @@
       "qpm/**",
       "assets/**"
     ],
+    "publish": {
+      "provider": "github",
+      "owner": "AchinthaMP",
+      "repo": "Magic-garden-Desktop"
+    },
     "win": {
       "target": [
         "nsis"
