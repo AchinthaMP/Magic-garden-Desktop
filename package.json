@@ -1,6 +1,6 @@
 {
   "name": "magic-garden-desktop",
-  "version": "0.26.3",
+  "version": "0.26.4",
   "description": "Magic Garden Desktop — standalone desktop client with QPM-GR mod integration",
   "main": "main.js",
   "scripts": {
