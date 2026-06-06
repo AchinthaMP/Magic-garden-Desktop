@@ -1,0 +1,38 @@
+{
+  "name": "magic-garden-desktop",
+  "version": "1.0.0",
+  "description": "Magic Garden Desktop — standalone desktop client with QPM-GR mod integration",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable --x64 --publish never",
+    "dist:ci": "electron-builder --win portable --x64 --publish never"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AchinthaMP/Magic-garden-Desktop.git"
+  },
+  "keywords": ["magic-garden", "qpm", "desktop", "electron"],
+  "author": "AchinthaMP",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "electron-builder": "^26.4.0"
+  },
+  "build": {
+    "appId": "com.magicgarden.desktop",
+    "productName": "Magic Garden",
+    "asar": true,
+    "compression": "maximum",
+    "files": [
+      "main.js",
+      "package.json",
+      "qpm/**",
+      "assets/**"
+    ],
+    "win": {
+      "target": "portable",
+      "artifactName": "Magic-Garden-Desktop-${version}.exe"
+    }
+  }
+}
