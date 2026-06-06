@@ -174,8 +174,8 @@ ipcMain.on('overlay:hide-badge', onHideBadge);
 
 function createOverlay() {
   overlayWin = new BrowserWindow({
-    width: 100,
-    height: 60,
+    width: 140,
+    height: 50,
     frame: false,
     transparent: true,
     resizable: false,
@@ -195,10 +195,10 @@ function createOverlay() {
   overlayWin.loadURL('data:text/html;charset=utf-8,' + encodeURIComponent(`
     <!DOCTYPE html><html><head><style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{width:100px;height:60px;background:transparent;display:flex;align-items:center;justify-content:flex-end;gap:6px;padding-right:8px;overflow:hidden;}
-    .version{color:#8b8e94;font-size:10px;font-weight:700;font-family:monospace;letter-spacing:1px;text-transform:uppercase;}
+    body{width:140px;height:50px;background:transparent;display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:0 6px;overflow:hidden;font-family:system-ui,-apple-system,sans-serif;}
+    .version{color:#8b8e94;font-size:9px;font-weight:700;font-family:monospace;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;}
     button{
-      width:44px;height:44px;border-radius:14px;border:1px solid #1f2226;
+      width:40px;height:40px;border-radius:12px;border:1px solid #1f2226;
       background:#0f1114;color:#8b8e94;cursor:pointer;display:flex;align-items:center;
       justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.6);
       transition:all .2s cubic-bezier(0.4, 0, 0.2, 1);outline:none;position:relative;
@@ -206,7 +206,7 @@ function createOverlay() {
     }
     button:hover{border-color:#d4b88c;color:#d4b88c;transform:translateY(-2px);background:#1a1d21;}
     button:active{transform:translateY(0);}
-    svg{width:22px;height:22px;}
+    svg{width:20px;height:20px;}
     .badge{
       display:none;position:absolute;top:-4px;right:-4px;width:12px;height:12px;
       background:#ff4d4d;border-radius:50%;border:2px solid #0f1114;
@@ -232,8 +232,8 @@ function positionOverlay() {
   var size = mainWindow.getContentSize();
   var pos = mainWindow.getPosition();
   overlayWin.setPosition(
-    pos[0] + size[0] - 100 - 20,
-    pos[1] + size[1] - 60 - 20
+    pos[0] + size[0] - 140 - 16,
+    pos[1] + 16
   );
 }
 
