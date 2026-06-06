@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --win portable --x64 --publish never",
-    "dist:ci": "electron-builder --win portable --x64 --publish never"
+    "dist": "electron-builder --win nsis --x64 --publish never",
+    "dist:ci": "electron-builder --win nsis --x64 --publish never"
   },
   "repository": {
     "type": "git",
@@ -33,15 +33,14 @@
     ],
     "win": {
       "target": [
-        "portable",
         "nsis"
-      ],
-      "artifactName": "Magic-Garden-Desktop-${version}.exe"
+      ]
     },
     "nsis": {
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
+      "artifactName": "Magic-Garden-Setup-${version}.exe",
       "installerIcon": null,
       "uninstallerIcon": null,
       "installerHeaderIcon": null,
